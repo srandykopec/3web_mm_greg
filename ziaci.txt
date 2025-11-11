@@ -3,6 +3,6 @@ Napíš svoje meno k číslo:
 1. Peter Koupil
 2. Samuel Michalik
 3. Dominik Nagy
-4.
+4. Nicolas Gambaľ
 5.
 6. Samuel Čaniga
