@@ -1,6 +1,9 @@
 # JavaScript Starterpack 🚀
 
-Kompletný úvodný materiál pre začiatočníkov v JavaScripte.
+> Frontend vs. Backend
+- Frontend: časť, ktorú vidí používateľ (UI v prehliadači). Jazyky: HTML, CSS, JavaScript/TypeScript. Nástroje: React, Vue, Angular, Svelte.
+- Backend: logika na serveri resp. to, čo užívateľ nevidí (API, databázy, autentifikácia). Jazyky: JavaScript/TypeScript (Node.js), Python (Django/Flask/FastAPI), PHP (Laravel), Java (Spring), C# (.NET), Ruby (Rails), Go. Databázy: SQL (PostgreSQL, MySQL), NoSQL (MongoDB).
+- Full‑stack: vývojár, ktorý robí frontend aj backend a prepája ich.
 
 ---
 
