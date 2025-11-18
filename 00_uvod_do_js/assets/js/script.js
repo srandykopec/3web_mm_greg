@@ -8,6 +8,7 @@ const text = document.getElementById("text");
 if (btn && text){
     btn.addEventListener("click",() => {
         text.textContent = "Nový obsah, koý som zmenil cez JavaScript!";
+        document.body.classList.toggle("alt-bg");
     });
 }
 
