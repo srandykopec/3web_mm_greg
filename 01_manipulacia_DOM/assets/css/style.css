@@ -1,0 +1,102 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 2rem;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+header h1 {
+    color: white;
+    font-size: 2.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.karta-profilu {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.riadok-info {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.riadok-info:last-of-type {
+    border-bottom: none;
+}
+
+.popis {
+    font-weight: 600;
+    color: #555;
+}
+
+.hodnota {
+    color: #667eea;
+    font-weight: 500;
+}
+
+.zvyrazneny {
+    background: #f5f5f5;
+    border-radius: 10px;
+    margin: 0.5rem 0;
+}
+
+.zvyrazneny .hodnota {
+    color: #764ba2;
+    font-weight: 700;
+}
+
+.bio {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+    border-radius: 15px;
+    border-left: 4px solid #667eea;
+}
+
+.bio p {
+    color: #333;
+    line-height: 1.6;
+    font-size: 1.1rem;
+}
+
+.status {
+    text-align: center;
+    margin-top: 2rem;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    color: white;
+    font-weight: 500;
+}
+
+/* Triedy pre JavaScript */
+.uspech {
+    background: rgba(76, 175, 80, 0.3);
+    border: 2px solid #4CAF50;
+}
+
+.nacitavam {
+    background: rgba(255, 152, 0, 0.3);
+    border: 2px solid #FF9800;
+}
