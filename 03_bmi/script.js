@@ -1,20 +1,22 @@
 
-const vyska = prompt("Zadaj výšku v metroch");
-const vaha = prompt("Zadaj hmotnosť v kilogramoch");
+const vstupVaha = document.getElementById(vaha);
+const vstupVyska = document.getElementById(vyska);
 
-console.log(vaha);
-console.log(vyska);
+console.log(vstupVaha);
+console.log(vstupVyska);
 
-const bmi = vaha / vyska*vyska;
+// console.log(vyska + vaha);
 
-console.log(bmi);
+// const bmi = vaha / vyska*vyska;
 
-if (bmi < 18.5){
-  console.log("Podváha");
-} else if (bmi >= 18.5 && bmi < 25){
-  console.log("Normálna váha");
-} else if (bmi >=25 && bmi < 30){
-  console.log("Nadváha");
-} else if (bmi >= 30 && bmi < 40){
-  console.log("Obezita");
-};
+// console.log(bmi);
+
+// if (bmi < 18.5){
+//   console.log("Podváha");
+// } else if (bmi >= 18.5 && bmi < 25){
+//   console.log("Normálna váha");
+// } else if (bmi >=25 && bmi < 30){
+//   console.log("Nadváha");
+// } else if (bmi >= 30 && bmi < 40){
+//   console.log("Obezita");
+// };
