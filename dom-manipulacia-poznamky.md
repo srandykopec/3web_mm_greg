@@ -520,19 +520,8 @@ const taskList = document.getElementById('taskList'); // Vyberieme <ul> element 
 taskList.appendChild(newLi); // Pridáme hotovú <li> do zoznamu (teraz sa zobrazí na stránke)
 ```
 
-**Výsledok:** Nová úloha sa objaví v zozname! Pozri kód todo apky. 🎉
+**Výsledok:** Nová úloha sa objaví v zozname!. 🎉
 
----
-
-### 4.3 `.prepend()` - pridanie na začiatok
-
-```javascript
-const taskList = document.getElementById('taskList');
-const newLi = document.createElement('li');
-newLi.textContent = 'Táto bude prvá';
-
-taskList.prepend(newLi); // pridá na začiatok zoznamu
-```
 
 ---
 
@@ -555,41 +544,13 @@ newButton.addEventListener('click', () => {
 
 ---
 
-## 5. Zmena štýlov (CSS) 🎨
+## 6. Zmena štýlov (CSS) 🎨
 
-### 5.1 `.style` - priame nastavenie CSS vlastností
 
-```javascript
-const box = document.getElementById('box');
 
-box.style.backgroundColor = 'red';
-box.style.color = 'white';
-box.style.fontSize = '20px';
-box.style.padding = '10px';
-```
+### 6.1 `.classList` - práca s class (ODPORÚČANÉ) ✅
 
-**📌 Príklad z nášho cvičenia (zmena farby pozadia):**
-```javascript
-function zmenaNaModru(){
-  document.body.style.backgroundColor = "#3498db"; // ← zmena farby body
-  farbaText.textContent = "modrá";
-}
-
-function zmenaNaZelenu(){
-  document.body.style.backgroundColor = "#2ecc71"; // ← iná farba
-  farbaText.textContent = "zelená";
-}
-```
-
-**⚠️ Pozor na zápis:**
-- CSS: `background-color` → JS: `backgroundColor` (camelCase)
-- CSS: `font-size` → JS: `fontSize`
-
----
-
-### 5.2 `.classList` - práca s class (ODPORÚČANÉ) ✅
-
-Namiesto priameho nastavovania štýlov je lepšie používať **CSS triedy**.
+Namiesto priameho nastavovania štýlov je lepšie používať **CSS triedy**. Už iba existujce triedy priradíme elementu, alebo mu triedu odoberieme. Prípadne ak element triedu má, tak mu ju odoberie ak nie je, pridá v jednom kroku (toggle).
 
 ```javascript
 const element = document.querySelector('.task-item');
@@ -634,9 +595,9 @@ checkbox.addEventListener('change', () => {
 
 ---
 
-## 6. Event Listeners - reagovanie na akcie 🖱️
+## 7. Event Listeners - reagovanie na akcie 🖱️
 
-### 6.1 `.addEventListener()` - základné použitie
+### 7.1 `.addEventListener()` - základné použitie
 
 ```javascript
 const button = document.getElementById('addButton');
@@ -653,7 +614,7 @@ element.addEventListener('typUdalosti', funkcia);
 
 ---
 
-### 6.2 Najpoužívanejšie eventy
+### 7.2 Najpoužívanejšie eventy
 
 | Event | Kedy sa spustí |
 |-------|----------------|
@@ -668,7 +629,7 @@ element.addEventListener('typUdalosti', funkcia);
 
 ---
 
-### 6.3 Praktické príklady z cvičení
+### 7.3 Praktické príklady z cvičení
 
 **📌 Príklad 1: Pridanie úlohy po kliknutí na tlačidlo**
 ```javascript
@@ -685,43 +646,6 @@ addButton.addEventListener('click', () => {
   // Vytvorenie novej úlohy...
 });
 ```
-
-**📌 Príklad 2: Zmena farby po kliknutí**
-```javascript
-const btnModra = document.getElementById("btn-modra");
-
-btnModra.addEventListener("click", zmenaNaModru);
-
-function zmenaNaModru(){
-  document.body.style.backgroundColor = "#3498db";
-}
-```
-
-**📌 Príklad 3: Zmazanie úlohy**
-```javascript
-const deleteButton = document.createElement('button');
-deleteButton.textContent = 'Zmazať';
-
-deleteButton.addEventListener('click', () => {
-  newLi.remove(); // zmaže celú úlohu
-});
-```
-
-**📌 Príklad 4: Označenie úlohy ako hotovej**
-```javascript
-const checkbox = document.createElement('input');
-checkbox.type = 'checkbox';
-
-checkbox.addEventListener('change', () => {
-  if (checkbox.checked) {
-    newLi.classList.add('completed');
-  } else {
-    newLi.classList.remove('completed');
-  }
-});
-```
-
----
 
 ## 8. Validácia vstupu ✅
 
@@ -750,38 +674,6 @@ if (taskText.trim() === "") {
 }
 ```
 
-**📌 Príklad z našej Todo aplikácie:**
-```javascript
-addButton.addEventListener('click', () => {
-  const taskText = taskInput.value;
-  
-  if (!taskText) {
-    return; // Ak je prázdny, neskoč ďalej
-  }
-  
-  // Vytvorenie úlohy...
-});
-```
-
----
-
-### 8.2 Vymazanie inputu po pridaní
-
-```javascript
-addButton.addEventListener('click', () => {
-  const taskText = taskInput.value;
-  
-  if (!taskText) return;
-  
-  // Vytvorenie úlohy...
-  
-  // Vymazanie inputu
-  taskInput.value = "";
-  
-  // Fokus späť na input (kurzor)
-  taskInput.focus();
-});
-```
 
 ---
 
@@ -923,83 +815,7 @@ taskList.appendChild(newLi); // Teraz sa zobrazí
 
 ---
 
-## 11. Komplexný príklad: Todo aplikácia 📝
-
-**HTML:**
-```html
-<input type="text" id="taskInput" placeholder="Pridaj novú úlohu...">
-<button id="addButton">Pridať</button>
-<ul id="taskList"></ul>
-```
-
-**JavaScript:**
-```javascript
-// 1. Výber elementov
-const addButton = document.getElementById('addButton');
-const taskInput = document.getElementById('taskInput');
-const taskList = document.getElementById('taskList');
-
-// 2. Event listener na tlačidlo
-addButton.addEventListener('click', () => {
-  
-  // 3. Získanie textu z inputu
-  const taskText = taskInput.value;
-  
-  // 4. Validácia (kontrola prázdneho vstupu)
-  if (!taskText) {
-    return; // Ak je prázdny, neskoč
-  }
-  
-  // 5. Vytvorenie hlavného <li> elementu
-  const newLi = document.createElement('li');
-  newLi.className = 'task-item';
-  
-  // 6. Vytvorenie checkboxu
-  const checkbox = document.createElement('input');
-  checkbox.type = 'checkbox';
-  checkbox.className = 'task-checkbox';
-  
-  // Event listener - označenie ako hotovej
-  checkbox.addEventListener('change', () => {
-    if (checkbox.checked) {
-      newLi.classList.add('completed');
-    } else {
-      newLi.classList.remove('completed');
-    }
-  });
-  
-  // 7. Vytvorenie span s textom
-  const span = document.createElement('span');
-  span.textContent = taskText;
-  span.className = 'task-text';
-  
-  // 8. Vytvorenie tlačidla na zmazanie
-  const deleteButton = document.createElement('button');
-  deleteButton.textContent = 'Zmazať';
-  deleteButton.className = 'delete-button';
-  
-  // Event listener - zmazanie úlohy
-  deleteButton.addEventListener('click', () => {
-    newLi.remove();
-  });
-  
-  // 9. Vloženie všetkých častí do <li>
-  newLi.appendChild(checkbox);
-  newLi.appendChild(span);
-  newLi.appendChild(deleteButton);
-  
-  // 10. Pridanie úlohy do zoznamu
-  taskList.appendChild(newLi);
-  
-  // 11. Vymazanie inputu
-  taskInput.value = "";
-  taskInput.focus();
-});
-```
-
----
-
-## 12. Zhrnutie - Cheatsheet 📋
+## 11. Zhrnutie - Cheatsheet 📋
 
 ### Výber elementov:
 ```javascript
@@ -1046,7 +862,7 @@ element.addEventListener('click', () => {
 
 ---
 
-## 13. Ďalšie zdroje 🔗
+## 12. Ďalšie zdroje 🔗
 
 - [MDN: DOM Manipulation](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Manipulating_documents)
 - [JavaScript.info: Document](https://javascript.info/document)
