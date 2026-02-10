@@ -864,7 +864,7 @@ element.addEventListener('click', () => {
 
 ## 12. Ďalšie zdroje 🔗
 
-- [MDN: DOM Manipulation](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Manipulating_documents)
+- [MDN: DOM Manipulation - klikni do stránky pravý tlačidlom myši > Preložiť](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Manipulating_documents)
 
 
 ---
