@@ -233,26 +233,59 @@ poleTlacidiel.map((btn) => btn.textContent); // ✅ funguje
 
 ### 2.1 `.textContent` - čistý text
 
+**Na čo je to dobré?** 
+`.textContent` je ako **"okienko" do elementu**, cez ktoré vidíš jeho textový obsah a môžeš ho meniť.
+
+**Predstav si to takto:**
+- Element je ako **škatuľka** 📦
+- `.textContent` je **nálepka na škatuľke**, kde je napísaný text
+- Môžeš **prečítať**, čo je na nálepke
+- Môžeš **prepísať** nálepku novým textom
+
 ```html
 <span id="farba-text">červená</span>
+<!-- Element = škatuľka, "červená" = nálepka s textom -->
 ```
 
 ```javascript
 const farbaText = document.getElementById("farba-text");
 
-// Čítanie textu
+// ČÍTANIE - pozrieš sa na nálepku, čo tam je
 console.log(farbaText.textContent); // "červená"
 
-// Zmena textu
+// ZMENA - prelepíš nálepku novým textom
 farbaText.textContent = "modrá";
+// Teraz v HTML je: <span id="farba-text">modrá</span>
 ```
+
+**Prečo je to užitočné?**
+- Dynamicky meniť texty na stránke (bez obnovenia)
+- Reagovať na akcie užívateľa (napr. kliknutie zmení text)
+- Aktualizovať počítadlá, správy, stav aplikácie
 
 **📌 Príklad z nášho cvičenia (zmena farby):**
 ```javascript
 function zmenaNaModru(){
   document.body.style.backgroundColor = "#3498db";
-  farbaText.textContent = "modrá"; // ← zmena textu
+  farbaText.textContent = "modrá"; // ← zmena nálepky na "modrá"
 }
+
+// Pred kliknutím: <span>červená</span>
+// Po kliknutí: <span>modrá</span>
+```
+
+**💡 Plastická predstava v praxi:**
+```javascript
+// Predstav si tlačidlo s počítadlom lajkov:
+const lajky = document.getElementById('pocet-lajkov');
+console.log(lajky.textContent); // "42" - pozrieš sa, koľko je lajkov
+
+// Užívateľ klikne na lajk:
+let pocet = Number(lajky.textContent); // preveď na číslo
+pocet++; // zvýš o 1
+lajky.textContent = pocet; // prepíš nálepku na nový počet
+
+// Výsledok: Z "42" sa stalo "43" na obrazovke!
 ```
 
 ---
