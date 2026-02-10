@@ -1,7 +1,16 @@
 const addButton = document.getElementById('addButton');
-const taskInput = document.getElementById('taskInput');
-const taskList = document.getElementById('taskList');
 
 
+addButton.addEventListener('click', () => {
+  const taskInput = document.getElementById('taskInput');
+  const taskList = document.getElementById('taskList');
+  const taskText = taskInput.value;
 
-console.log(addButton);
+  if (!taskText){
+    console.log("nič sa nestalo");
+    return
+  }
+
+  let newLi = document.createElement('li');
+
+});
