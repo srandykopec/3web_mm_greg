@@ -7,10 +7,21 @@ addButton.addEventListener('click', () => {
   const taskText = taskInput.value;
 
   if (!taskText){
-    console.log("nič sa nestalo");
     return
   }
-
+  
   let newLi = document.createElement('li');
+  newLi.textContent = taskText;
+  console.log(newLi);
+  
+  let newInput = document.createElement('input');
+  newInput.type = 'checkbox';  /*zmenil som typ inputu na chechbox */
+  
+  let newSpan = document.createElement('span');
 
+  let newButton = document.createElement('button');
+
+
+
+  // DOKONČIT A POSLAŤ 
 });
