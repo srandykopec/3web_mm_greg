@@ -4,7 +4,7 @@
 
 ---
 
-## 🤔 Na čo je DOM dobrá?
+## 🤔 Na čo je DOM dobrý?
 
 **DOM = most medzi HTML a JavaScriptom.** Umožňuje meniť stránku bez obnovenia.
 
