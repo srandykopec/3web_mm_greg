@@ -1,4 +1,4 @@
-# DOM Manipulácia - Poznámky z cvičení 🎯
+# DOM Manipulácia s elementami HTML pomocou JavaScriptu 🎯
 
 > **DOM (Document Object Model)** = Stromová štruktúra HTML dokumentu, ktorú môžeme čítať a meniť pomocou JavaScriptu.
 
