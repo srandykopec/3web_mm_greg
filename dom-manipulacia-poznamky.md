@@ -405,6 +405,8 @@ console.log(newLi); // <li></li> (prázdny element)
 
 ### 3.2 Nastavenie vlastností nového elementu
 
+**Vytvorený element je prázdny** - musíme mu nastaviť charakteristiky (text, class, id, type...), akoby sme vyplňovali formulár o elemente.
+
 ```javascript
 // Vytvorenie inputu typu checkbox
 const newInput = document.createElement('input');
