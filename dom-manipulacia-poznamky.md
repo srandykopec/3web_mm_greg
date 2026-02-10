@@ -4,235 +4,84 @@
 
 ---
 
-## 🤔 Na čo je stromová štruktúra DOM dobrá?
+## 🤔 Na čo je DOM dobrá?
 
-**Bez JavaScriptu a DOM:** Stránka je statická - len text, obrázky, linky. Nič sa nedeje.
+**DOM = most medzi HTML a JavaScriptom.** Umožňuje meniť stránku bez obnovenia.
 
-**S JavaScriptom a DOM:** Stránka je **interaktívna** - reaguje na to, čo robíš!
+| Čo dokážeme | JavaScript príklad | Použitie v praxi |
+|-------------|-------------------|------------------|
+| **Reagovať na akcie** | `button.addEventListener('click', ...)` | Lajkovanie, rozbaľovacie menu, dark mode |
+| **Meniť obsah** | `element.textContent = 'Nový text'` | Počítadlo lajkov, aktualizácia košíka |
+| **Pridávať elementy** | `parent.appendChild(newElement)` | Nový komentár, správa v chate |
+| **Odstraňovať** | `element.remove()` | Zmazať komentár, zavrieť okno |
+| **Validovať vstupy** | `if (!input.value) {...}` | Kontrola formulárov, prihlásenie |
+| **Získať dáta** | `const text = input.value` | Vyhľadávanie, chat |
+| **Zmeniť štýly** | `element.classList.toggle('active')` | Animácie, notifikácie |
 
-### Praktické príklady - čo dokážeme s DOM:
-
-#### ✅ **1. Reagovať na kliknutia, písanie, pohyb myši**
-```javascript
-// Tlačidlo zmení farbu pozadia po kliknutí
-button.addEventListener('click', () => {
-  document.body.style.backgroundColor = 'blue';
-});
-```
-**Príklad zo života:** Lajkovanie príspevku na Instagrame, rozbaľovacie menu, dark mode prepínač.
-
----
-
-#### ✅ **2. Meniť obsah stránky bez obnovenia**
-```javascript
-// Zmena textu po kliknutí
-nadpis.textContent = 'Nový text';
-```
-**Príklad zo života:** Počítadlo lajkov, aktualizácia košíka v e-shope, live chat.
+**Zhrnutie:** Bez DOM = statická stránka. S DOM = interaktívna aplikácia! 🎯
 
 ---
 
-#### ✅ **3. Pridávať nové veci na stránku (dynamicky)**
-```javascript
-// Pridanie novej úlohy do Todo listu
-const newTask = document.createElement('li');
-newTask.textContent = 'Nová úloha';
-taskList.appendChild(newTask);
-```
-**Príklad zo života:** Pridanie komentára pod príspevkom, nová správa v chate, pridanie produktu do košíka.
-
----
-
-#### ✅ **4. Odstraňovať veci zo stránky**
-```javascript
-// Zmazanie úlohy
-task.remove();
-```
-**Príklad zo života:** Zmazanie komentára, odstránenie produktu z košíka, zavretie modálneho okna.
-
----
-
-#### ✅ **5. Validovať formuláre (kontrolovať vstupy)**
-```javascript
-// Skontrolovať, či užívateľ niečo napísal
-if (!input.value) {
-  alert('Musíš niečo napísať!');
-}
-```
-**Príklad zo života:** Registračný formulár (kontrola prázdnych polí, správny email), prihlásenie.
-
----
-
-#### ✅ **6. Vytvárať animácie a efekty**
-```javascript
-// Pridanie/odobranie class pre animáciu
-element.classList.toggle('fadeIn');
-```
-**Príklad zo života:** Vyskakovacie notifikácie, slider obrázkov, plynulé scrollovanie.
-
----
-
-#### ✅ **7. Získavať dáta od užívateľa**
-```javascript
-// Čítanie toho, čo užívateľ napísal
-const text = input.value;
-```
-**Príklad zo života:** Vyhľadávanie na Google, vyplnenie formulára, napísanie komentára.
-
----
-
-### � Vizualizácia: Ako vyzerá DOM strom?
+## 🌳 Ako vyzerá DOM strom?
 
 **HTML kód:**
 ```html
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Moja stránka</title>
-  </head>
-  <body>
-    <h1 id="nadpis">Ahoj!</h1>
-    <ul id="zoznam">
-      <li>Položka 1</li>
-      <li>Položka 2</li>
-    </ul>
-    <button id="tlacitko">Klikni</button>
-  </body>
-</html>
+<body>
+  <h1 id="nadpis">Ahoj!</h1>
+  <ul id="zoznam">
+    <li>Položka 1</li>
+    <li>Položka 2</li>
+  </ul>
+</body>
 ```
 
-**DOM strom (stromová štruktúra):**
+**DOM strom:**
 ```
-document
-│
-└── html
-    │
-    ├── head
-    │   └── title
-    │       └── "Moja stránka"
-    │
-    └── body
-        │
-        ├── h1 (#nadpis)
-        │   └── "Ahoj!"
-        │
-        ├── ul (#zoznam)
-        │   ├── li
-        │   │   └── "Položka 1"
-        │   └── li
-        │       └── "Položka 2"
-        │
-        └── button (#tlacitko)
-            └── "Klikni"
+body
+├── h1 (#nadpis)
+│   └── "Ahoj!"
+└── ul (#zoznam)
+    ├── li → "Položka 1"
+    └── li → "Položka 2"
 ```
 
-**📌 Vysvetlenie:**
-- Každý HTML element je **uzol (node)** v strome
-- **document** = koreň stromu (celý dokument)
-- **html** = hlavný element
-- **body, h1, ul, li, button** = vetvy a listy stromu
-- **text** = obsah elementov
+**Podstata:** Každý HTML element = uzol v strome. JavaScript "chodí" po tomto strome a mení ho.
 
 ---
 
-### 🎬 Vizualizácia: Ako funguje manipulácia?
+## 🔧 Princíp manipulácie (Todo aplikácia)
 
-#### Príklad 1: Pridanie nového elementu
-
-**Pred:**
-```
-ul (#zoznam)
-│
-├── li
-│   └── "Položka 1"
-└── li
-    └── "Položka 2"
+**Pred kliknutím:**
+```html
+<ul id="taskList">
+  <li>Úloha 1</li>
+</ul>
 ```
 
 **JavaScript:**
 ```javascript
-const zoznam = document.getElementById('zoznam');
-const novaLi = document.createElement('li');
-novaLi.textContent = 'Položka 3';
-zoznam.appendChild(novaLi);
+// 1. Vyhľadaj element v DOM strome
+const taskList = document.getElementById('taskList');
+
+// 2. Vytvor nový element (zatiaľ len v pamäti)
+const newLi = document.createElement('li');
+newLi.textContent = 'Úloha 2';
+
+// 3. Pridaj do stromu (teraz sa zobrazí na stránke)
+taskList.appendChild(newLi);
 ```
 
-**Po:**
-```
-ul (#zoznam)
-│
-├── li
-│   └── "Položka 1"
-├── li
-│   └── "Položka 2"
-└── li  ← NOVÉ!
-    └── "Položka 3"
+**Po vykonaní:**
+```html
+<ul id="taskList">
+  <li>Úloha 1</li>
+  <li>Úloha 2</li> ← NOVÉ!
+</ul>
 ```
 
----
+**Proces:** HTML → DOM strom → JS nájde element → JS upraví → prehliadač prekreslí ✅
 
-#### Príklad 2: Odstránenie elementu
-
-**Pred:**
-```
-ul (#zoznam)
-│
-├── li
-│   └── "Položka 1"
-├── li
-│   └── "Položka 2"
-└── li
-    └── "Položka 3"
-```
-
-**JavaScript:**
-```javascript
-const druhaPolozka = zoznam.children[1];
-druhaPolozka.remove();
-```
-
-**Po:**
-```
-ul (#zoznam)
-│
-├── li
-│   └── "Položka 1"
-└── li
-    └── "Položka 3"  ← Položka 2 ZMAZANÁ!
-```
-
----
-
-### 🔄 Ako to funguje krok po kroku?
-
-```
-1. HTML sa načíta do prehliadača
-   ↓
-2. Prehliadač vytvorí DOM strom (každý element = uzol)
-   ↓
-3. JavaScript "vyhľadá" element v strome
-   (document.getElementById, querySelector...)
-   ↓
-4. JavaScript upraví element (zmena textu, pridanie, zmazanie...)
-   ↓
-5. Prehliadač automaticky prekreslí stránku
-   ↓
-6. Užívateľ vidí zmenu! 🎉
-```
-
----
-
-### �🎯 Zhrnutie: Prečo potrebujeme DOM?
-
-| Bez DOM (len HTML/CSS) | S DOM (JavaScript) |
-|------------------------|-------------------|
-| Statická stránka | **Interaktívna aplikácia** |
-| Nič sa nedeje | **Reaguje na akcie** |
-| Stále rovnaký obsah | **Mení sa dynamicky** |
-| Nemôžeš pridať/odobrať veci | **Vytváraš/mažeš elementy** |
-| Formulár len pošle dáta | **Validácia pred odoslaním** |
-
-**💡 DOM je most medzi HTML a JavaScriptom** - umožňuje nám meniť stránku pomocou kódu!
+**💡 Kľúčové:** JavaScript pracuje s DOM stromom v pamäti, nie priamo s HTML súborom!
 
 ---
 
@@ -852,7 +701,7 @@ if (button) {
 ```javascript
 const taskInput = document.getElementById('taskInput');
 
-// ❌ ZLEHYBA
+// ❌ CHYBA
 const text = taskInput; // Vráti element, nie text!
 
 // ✅ SPRÁVNE
