@@ -4,7 +4,7 @@
 
 ---
 
-## 🤔 Na čo je DOM dobrá?
+## 🤔 Na čo je stromová štruktúra DOM dobrá?
 
 **Bez JavaScriptu a DOM:** Stránka je statická - len text, obrázky, linky. Nič sa nedeje.
 
@@ -81,7 +81,174 @@ const text = input.value;
 
 ---
 
-### 🎯 Zhrnutie: Prečo potrebujeme DOM?
+### � Vizualizácia: Ako vyzerá DOM strom?
+
+**HTML kód:**
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Moja stránka</title>
+  </head>
+  <body>
+    <h1 id="nadpis">Ahoj!</h1>
+    <ul id="zoznam">
+      <li>Položka 1</li>
+      <li>Položka 2</li>
+    </ul>
+    <button id="tlacitko">Klikni</button>
+  </body>
+</html>
+```
+
+**DOM strom (stromová štruktúra):**
+```
+document
+│
+└── html
+    │
+    ├── head
+    │   └── title
+    │       └── "Moja stránka"
+    │
+    └── body
+        │
+        ├── h1 (#nadpis)
+        │   └── "Ahoj!"
+        │
+        ├── ul (#zoznam)
+        │   ├── li
+        │   │   └── "Položka 1"
+        │   └── li
+        │       └── "Položka 2"
+        │
+        └── button (#tlacitko)
+            └── "Klikni"
+```
+
+**📌 Vysvetlenie:**
+- Každý HTML element je **uzol (node)** v strome
+- **document** = koreň stromu (celý dokument)
+- **html** = hlavný element
+- **body, h1, ul, li, button** = vetvy a listy stromu
+- **text** = obsah elementov
+
+---
+
+### 🎬 Vizualizácia: Ako funguje manipulácia?
+
+#### Príklad 1: Zmena textu
+
+**Pred:**
+```
+body
+│
+└── h1 (#nadpis)
+    └── "Ahoj!"
+```
+
+**JavaScript:**
+```javascript
+const nadpis = document.getElementById('nadpis');
+nadpis.textContent = 'Čauky!';
+```
+
+**Po:**
+```
+body
+│
+└── h1 (#nadpis)
+    └── "Čauky!"  ← ZMENENÉ!
+```
+
+---
+
+#### Príklad 2: Pridanie nového elementu
+
+**Pred:**
+```
+ul (#zoznam)
+│
+├── li
+│   └── "Položka 1"
+└── li
+    └── "Položka 2"
+```
+
+**JavaScript:**
+```javascript
+const zoznam = document.getElementById('zoznam');
+const novaLi = document.createElement('li');
+novaLi.textContent = 'Položka 3';
+zoznam.appendChild(novaLi);
+```
+
+**Po:**
+```
+ul (#zoznam)
+│
+├── li
+│   └── "Položka 1"
+├── li
+│   └── "Položka 2"
+└── li  ← NOVÉ!
+    └── "Položka 3"
+```
+
+---
+
+#### Príklad 3: Odstránenie elementu
+
+**Pred:**
+```
+ul (#zoznam)
+│
+├── li
+│   └── "Položka 1"
+├── li
+│   └── "Položka 2"
+└── li
+    └── "Položka 3"
+```
+
+**JavaScript:**
+```javascript
+const druhaPolozka = zoznam.children[1];
+druhaPolozka.remove();
+```
+
+**Po:**
+```
+ul (#zoznam)
+│
+├── li
+│   └── "Položka 1"
+└── li
+    └── "Položka 3"  ← Položka 2 ZMAZANÁ!
+```
+
+---
+
+### 🔄 Ako to funguje krok po kroku?
+
+```
+1. HTML sa načíta do prehliadača
+   ↓
+2. Prehliadač vytvorí DOM strom (každý element = uzol)
+   ↓
+3. JavaScript "vyhľadá" element v strome
+   (document.getElementById, querySelector...)
+   ↓
+4. JavaScript upraví element (zmena textu, pridanie, zmazanie...)
+   ↓
+5. Prehliadač automaticky prekreslí stránku
+   ↓
+6. Užívateľ vidí zmenu! 🎉
+```
+
+---
+
+### �🎯 Zhrnutie: Prečo potrebujeme DOM?
 
 | Bez DOM (len HTML/CSS) | S DOM (JavaScript) |
 |------------------------|-------------------|
