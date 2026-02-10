@@ -4,6 +4,97 @@
 
 ---
 
+## 🤔 Na čo je DOM dobrá?
+
+**Bez JavaScriptu a DOM:** Stránka je statická - len text, obrázky, linky. Nič sa nedeje.
+
+**S JavaScriptom a DOM:** Stránka je **interaktívna** - reaguje na to, čo robíš!
+
+### Praktické príklady - čo dokážeme s DOM:
+
+#### ✅ **1. Reagovať na kliknutia, písanie, pohyb myši**
+```javascript
+// Tlačidlo zmení farbu pozadia po kliknutí
+button.addEventListener('click', () => {
+  document.body.style.backgroundColor = 'blue';
+});
+```
+**Príklad zo života:** Lajkovanie príspevku na Instagrame, rozbaľovacie menu, dark mode prepínač.
+
+---
+
+#### ✅ **2. Meniť obsah stránky bez obnovenia**
+```javascript
+// Zmena textu po kliknutí
+nadpis.textContent = 'Nový text';
+```
+**Príklad zo života:** Počítadlo lajkov, aktualizácia košíka v e-shope, live chat.
+
+---
+
+#### ✅ **3. Pridávať nové veci na stránku (dynamicky)**
+```javascript
+// Pridanie novej úlohy do Todo listu
+const newTask = document.createElement('li');
+newTask.textContent = 'Nová úloha';
+taskList.appendChild(newTask);
+```
+**Príklad zo života:** Pridanie komentára pod príspevkom, nová správa v chate, pridanie produktu do košíka.
+
+---
+
+#### ✅ **4. Odstraňovať veci zo stránky**
+```javascript
+// Zmazanie úlohy
+task.remove();
+```
+**Príklad zo života:** Zmazanie komentára, odstránenie produktu z košíka, zavretie modálneho okna.
+
+---
+
+#### ✅ **5. Validovať formuláre (kontrolovať vstupy)**
+```javascript
+// Skontrolovať, či užívateľ niečo napísal
+if (!input.value) {
+  alert('Musíš niečo napísať!');
+}
+```
+**Príklad zo života:** Registračný formulár (kontrola prázdnych polí, správny email), prihlásenie.
+
+---
+
+#### ✅ **6. Vytvárať animácie a efekty**
+```javascript
+// Pridanie/odobranie class pre animáciu
+element.classList.toggle('fadeIn');
+```
+**Príklad zo života:** Vyskakovacie notifikácie, slider obrázkov, plynulé scrollovanie.
+
+---
+
+#### ✅ **7. Získavať dáta od užívateľa**
+```javascript
+// Čítanie toho, čo užívateľ napísal
+const text = input.value;
+```
+**Príklad zo života:** Vyhľadávanie na Google, vyplnenie formulára, napísanie komentára.
+
+---
+
+### 🎯 Zhrnutie: Prečo potrebujeme DOM?
+
+| Bez DOM (len HTML/CSS) | S DOM (JavaScript) |
+|------------------------|-------------------|
+| Statická stránka | **Interaktívna aplikácia** |
+| Nič sa nedeje | **Reaguje na akcie** |
+| Stále rovnaký obsah | **Mení sa dynamicky** |
+| Nemôžeš pridať/odobrať veci | **Vytváraš/mažeš elementy** |
+| Formulár len pošle dáta | **Validácia pred odoslaním** |
+
+**💡 DOM je most medzi HTML a JavaScriptom** - umožňuje nám meniť stránku pomocou kódu!
+
+---
+
 ## 1. Výber elementov z HTML
 
 Predtým, než môžeme s elementom niečo urobiť, musíme ho **vybrať** (vytiahnuť z HTML do JS).
