@@ -65,7 +65,7 @@ const taskList = document.getElementById('taskList');
 
 // 2. Vytvor nový element (zatiaľ len v pamäti)
 const newLi = document.createElement('li');
-newLi.textContent = 'Úloha 2';
+newLi.textContent = 'Úloha 2'; //Naplň element v premnnej newLi textom "Úloha 2"
 
 // 3. Pridaj do stromu (teraz sa zobrazí na stránke)
 taskList.appendChild(newLi);
@@ -101,17 +101,10 @@ Predtým, než môžeme s elementom niečo urobiť, musíme ho **vybrať** (vyti
 
 ```javascript
 // JavaScript
-const addButton = document.getElementById('addButton');
+const addButton = document.getElementById('addButton'); //do premennej addButton vytiahni html element s id addButton
 const taskInput = document.getElementById('taskInput');
 
 console.log(addButton); // <button id="addButton">Pridať</button>
-```
-
-**📌 Príklad z nášho cvičenia (zmena farby pozadia):**
-```javascript
-const btnModra = document.getElementById("btn-modra");
-const btnZelena = document.getElementById("btn-zelena");
-const farbaText = document.getElementById("farba-text");
 ```
 
 **⚠️ Pozor:** 
@@ -122,49 +115,117 @@ const farbaText = document.getElementById("farba-text");
 
 ### 1.2 `querySelector()` - výber pomocou CSS selektoru
 
-Vráti **prvý element**, ktorý nájde. Môžeme použiť **akýkoľvek CSS selektor**.
+Vráti **LEN PRVÝ element**, ktorý nájde. Ak existuje viac elementov s rovnakým selektorom, zoberie prvý a ostatné ignoruje.
 
 ```html
 <!-- HTML -->
 <button class="btn">Tlačidlo 1</button>
 <button class="btn">Tlačidlo 2</button>
+<button class="btn">Tlačidlo 3</button>
 ```
 
 ```javascript
-// Výber prvého tlačidla s class="btn"
-const tlacitko = document.querySelector('.btn');
+// Vyberie LEN prvé tlačidlo s class="btn"
+const tlacitko = document.querySelector('.btn'); 
+console.log(tlacitko); // <button class="btn">Tlačidlo 1</button>
+
+// Druhé a tretie tlačidlo sa ignorujú!
 
 // Výber podľa ID (s #)
 const addButton = document.querySelector('#addButton');
 
-// Výber podľa tagu
+// Výber podľa tagu - vyberie prvý <li>
 const prvaPolozka = document.querySelector('li');
 ```
+
+**💡 Rozdiel oproti `getElementById`:**
+- `getElementById('id')` - BEZ #, len pre ID
+- `querySelector('#id')` - S #, môžeš použiť akýkoľvek CSS selektor (.class, tag, #id...)
 
 **Kedy použiť:**
 - Keď chceme vybrať element podľa **class**
 - Keď potrebujeme **zložitejší selektor** (napr. `'.container > .box'`)
+- Keď chceme **len prvý** z viacerých rovnakých elementov
 
 ---
 
 ### 1.3 `querySelectorAll()` - výber viacerých elementov
 
-Vráti **NodeList** (zoznam) všetkých elementov, ktoré vyhovujú.
+Vráti **NodeList** (podobné ako pole) so **VŠETKÝMI** elementmi, ktoré vyhovujú selektoru.
+
+```html
+<!-- HTML -->
+<button class="btn">Tlačidlo 1</button>
+<button class="btn">Tlačidlo 2</button>
+<button class="btn">Tlačidlo 3</button>
+```
 
 ```javascript
+// Vyberie VŠETKY tlačidlá s class="btn"
+const vsetkyTlacidla = document.querySelectorAll('.btn');
+console.log(vsetkyTlacidla.length); // 3
+
 // Vyberie všetky li elementy
 const vsetkyUlohy = document.querySelectorAll('li');
 
 // Vyberie všetky elementy s class="task-item"
 const vsetkyPolozky = document.querySelectorAll('.task-item');
 
-console.log(vsetkyPolozky.length); // Počet prvkov
-
 // Prechádzanie cez všetky prvky
-vsetkyPolozky.forEach((polozka) => {
-  console.log(polozka);
+vsetkyTlacidla.forEach((tlacidlo, index) => {
+  console.log(`Tlačidlo ${index + 1}:`, tlacidlo);
 });
+// Vypíše:
+// Tlačidlo 1: <button class="btn">Tlačidlo 1</button>
+// Tlačidlo 2: <button class="btn">Tlačidlo 2</button>
+// Tlačidlo 3: <button class="btn">Tlačidlo 3</button>
 ```
+
+**🤔 Je NodeList pole?**
+
+**Nie úplne!** NodeList vyzerá ako pole, ale **nie je to klasické pole (Array)**.
+
+```javascript
+const vsetkyTlacidla = document.querySelectorAll('.btn');
+
+// ✅ Toto funguje:
+console.log(vsetkyTlacidla.length);     // 3
+console.log(vsetkyTlacidla[0]);         // prvý element
+vsetkyTlacidla.forEach((btn) => {...}); // forEach funguje
+
+// ❌ Toto NEFUNGUJE (pole metódy):
+vsetkyTlacidla.map((btn) => {...});     // ❌ CHYBA!
+vsetkyTlacidla.filter((btn) => {...});  // ❌ CHYBA!
+vsetkyTlacidla.push(novyElement);       // ❌ CHYBA!
+```
+
+**💡 Ak potrebuješ pole, preveď NodeList na Array:**
+```javascript
+const vsetkyTlacidla = document.querySelectorAll('.btn');
+
+// Prevod na klasické pole
+const poleTlacidiel = Array.from(vsetkyTlacidla);
+// alebo
+const poleTlacidiel2 = [...vsetkyTlacidla]; // spread operátor
+
+// Teraz funguje všetko:
+poleTlacidiel.map((btn) => btn.textContent); // ✅ funguje
+```
+
+---
+
+## 📊 Porovnanie metód výberu
+
+| Metóda | Čo vráti | Syntax v HTML | Príklad |
+|--------|----------|---------------|---------|
+| `getElementById()` | **1 element** alebo null | BEZ # | `document.getElementById('addButton')` |
+| `querySelector()` | **1 element** (prvý) alebo null | S CSS selektorom | `document.querySelector('.btn')` |
+| `querySelectorAll()` | **NodeList** (všetky) | S CSS selektorom | `document.querySelectorAll('.btn')` |
+
+**Ktorú použiť?**
+- Máš ID? → `getElementById('id')` ✅ (najrýchlejšia)
+- Chceš prvý element s class? → `querySelector('.class')` ✅
+- Chceš všetky elementy? → `querySelectorAll('.class')` ✅
 
 ---
 
