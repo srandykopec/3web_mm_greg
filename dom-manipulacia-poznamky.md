@@ -144,12 +144,11 @@ const prvaPolozka = document.querySelector('li');
 
 **Kedy použiť:**
 - Keď chceme vybrať element podľa **class**
-- Keď potrebujeme **zložitejší selektor** (napr. `'.container > .box'`)
 - Keď chceme **len prvý** z viacerých rovnakých elementov
 
 ---
 
-### 1.3 `querySelectorAll()` - výber viacerých elementov
+### 1.3 `querySelectorAll()` - výber viacerých elementov (nepoužívali sme)
 
 Vráti **NodeList** (podobné ako pole) so **VŠETKÝMI** elementmi, ktoré vyhovujú selektoru.
 
@@ -237,8 +236,8 @@ poleTlacidiel.map((btn) => btn.textContent); // ✅ funguje
 `.textContent` je ako **"okienko" do elementu**, cez ktoré vidíš jeho textový obsah a môžeš ho meniť.
 
 **Predstav si to takto:**
-- Element je ako **škatuľka** 📦
-- `.textContent` je **nálepka na škatuľke**, kde je napísaný text
+- Element je ako **krabica** 📦
+- `.textContent` je **nálepka na krabici**, kde je napísaný text
 - Môžeš **prečítať**, čo je na nálepke
 - Môžeš **prepísať** nálepku novým textom
 
@@ -263,18 +262,9 @@ farbaText.textContent = "modrá";
 - Reagovať na akcie užívateľa (napr. kliknutie zmení text)
 - Aktualizovať počítadlá, správy, stav aplikácie
 
-**📌 Príklad z nášho cvičenia (zmena farby):**
-```javascript
-function zmenaNaModru(){
-  document.body.style.backgroundColor = "#3498db";
-  farbaText.textContent = "modrá"; // ← zmena nálepky na "modrá"
-}
-
-// Pred kliknutím: <span>červená</span>
-// Po kliknutí: <span>modrá</span>
 ```
 
-**💡 Plastická predstava v praxi:**
+**💡 Príklad z praxe:**
 ```javascript
 // Predstav si tlačidlo s počítadlom lajkov:
 const lajky = document.getElementById('pocet-lajkov');
@@ -292,54 +282,102 @@ lajky.textContent = pocet; // prepíš nálepku na nový počet
 
 ### 2.2 `.innerHTML` - HTML kód
 
+**Základný princíp:**
+`.innerHTML` = písanie HTML kódu cez JavaScript (akoby si písal HTML, len v JS)
+
+**Rozdiel:**
+- `.textContent` = len text (HTML tagy ignoruje)
+- `.innerHTML` = HTML kód (tagy sa vykreslia)
+
+```html
+<div id="container">Ahoj</div>
+```
+
 ```javascript
 const container = document.getElementById("container");
 
-// Vloženie HTML
-container.innerHTML = "<strong>Tučný text</strong>";
+// INNERHTML - napíšeš HTML ako v HTML súbore
+container.innerHTML = "<strong>Tučné</strong>";
+// do elementu, ktorý je uložený v premennej container vloží nový html element <strong>
 
-// Pridanie HTML k existujúcemu obsahu
-container.innerHTML += "<p>Nový odsek</p>";
 ```
 
-**⚠️ Rozdiel:**
-- `.textContent` = len text (HTML tagy sa nezobrazujú)
-- `.innerHTML` = HTML kód (tagy sa vykreslia)
+**Praktický príklad:**
+```javascript
+// Je to akoby si priamo v HTML súbore napísal:
+// <div id="container"><strong>Tučné</strong></div>
+// Len to robíš cez JavaScript!
+```
 
+**Kedy čo použiť:**
+- Obyčajný text? → `.textContent` ✅
+- Potrebuješ HTML tagy (`<strong>`, `<em>`)? → `.innerHTML` ✅
+- Text od užívateľa (input)? → `.textContent` ✅ (bezpečné!)
 ---
 
-### 2.3 `.value` - hodnota inputu
+### 2.3 `.value` - hodnota formulárových polí
+
+**Základný princíp:**
+`.value` = získanie alebo nastavenie obsahu formulárových prvkov (`<input>`, `<textarea>`, `<select>`)
 
 ```html
 <input type="text" id="taskInput" placeholder="Napíš text...">
+<textarea id="poznamka"></textarea>
+<select id="farba">
+  <option>červená</option>
+  <option>modrá</option>
+</select>
 ```
 
 ```javascript
 const taskInput = document.getElementById('taskInput');
 
-// Čítanie hodnoty
+// ČÍTANIE - čo užívateľ napísal?
 const text = taskInput.value;
-console.log(text); // To, čo užívateľ napísal
+console.log(text); // "Kúpiť mlieko" (ak to užívateľ napísal)
 
-// Nastavenie hodnoty
-taskInput.value = "Nový text";
+// NASTAVENIE - napíš do inputu
+taskInput.value = "Nový text"; // input sa vyplní textom
 
-// Vymazanie inputu
-taskInput.value = "";
+// VYMAZANIE - vyčisti input
+taskInput.value = ""; // prázdny input
 ```
 
-**📌 Príklad z našej Todo aplikácie:**
+**💡 Najčastejšie použitie:**
 ```javascript
+// Todo aplikácia - získanie textu z inputu
 addButton.addEventListener('click', () => {
-  const taskInput = document.getElementById('taskInput');
-  const taskText = taskInput.value; // ← získanie textu z inputu
+  const taskText = taskInput.value; // ← čítame, čo užívateľ napísal
   
   if (!taskText) {
     return; // Ak je prázdny, neskoč
   }
   
-  // ... vytvorenie úlohy
+  // ... vytvoríme novú úlohu ...
+  
+  taskInput.value = ""; // ← vymažeme input po pridaní
 });
+```
+
+**⚠️ POZOR:**
+```javascript
+// ❌ CHYBA - zabudnutie .value
+const text = taskInput; // vráti celý element, nie text!
+
+// ✅ SPRÁVNE
+const text = taskInput.value; // vráti string s textom
+```
+
+**💡 Dôležitý rozdiel:**
+```javascript
+// Pre <input>, <textarea>, <select> → .value
+const inputText = taskInput.value; // ✅
+
+// Pre <p>, <div>, <span>, <h1>... → .textContent
+const paragrafText = odstavec.textContent; // ✅
+
+// Toto NEBUDE fungovať:
+const text = odstavec.value; // ❌ undefined! (nie je formulárový prvok)
 ```
 
 ---
