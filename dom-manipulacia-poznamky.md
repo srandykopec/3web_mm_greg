@@ -137,33 +137,7 @@ document
 
 ### 🎬 Vizualizácia: Ako funguje manipulácia?
 
-#### Príklad 1: Zmena textu
-
-**Pred:**
-```
-body
-│
-└── h1 (#nadpis)
-    └── "Ahoj!"
-```
-
-**JavaScript:**
-```javascript
-const nadpis = document.getElementById('nadpis');
-nadpis.textContent = 'Čauky!';
-```
-
-**Po:**
-```
-body
-│
-└── h1 (#nadpis)
-    └── "Čauky!"  ← ZMENENÉ!
-```
-
----
-
-#### Príklad 2: Pridanie nového elementu
+#### Príklad 1: Pridanie nového elementu
 
 **Pred:**
 ```
@@ -197,7 +171,7 @@ ul (#zoznam)
 
 ---
 
-#### Príklad 3: Odstránenie elementu
+#### Príklad 2: Odstránenie elementu
 
 **Pred:**
 ```
