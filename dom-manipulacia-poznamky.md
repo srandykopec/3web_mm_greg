@@ -584,7 +584,7 @@ if (element.classList.contains('completed')) {
 
 ```javascript
 // JavaScript - kliknutie na checkbox
-checkbox.addEventListener('change', () => {
+checkbox.addEventListener('change', () => { //ak sa zmenil typ udalosti 
   if (checkbox.checked) {
     newLi.classList.add('completed'); // pridá škrtnutie
   } else {
@@ -815,7 +815,7 @@ taskList.appendChild(newLi); // Teraz sa zobrazí
 
 ---
 
-## 11. Zhrnutie - Cheatsheet 📋
+## 11. Zhrnutie 📋
 
 ### Výber elementov:
 ```javascript
@@ -865,8 +865,7 @@ element.addEventListener('click', () => {
 ## 12. Ďalšie zdroje 🔗
 
 - [MDN: DOM Manipulation](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Manipulating_documents)
-- [JavaScript.info: Document](https://javascript.info/document)
-- [W3Schools: HTML DOM](https://www.w3schools.com/js/js_htmldom.asp)
+
 
 ---
 
