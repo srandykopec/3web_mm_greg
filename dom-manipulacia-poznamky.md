@@ -804,7 +804,70 @@ addButton.addEventListener('click', () => {
 
 ---
 
-## 9. Časté chyby a riešenia ⚠️
+## 9. Vlastnosti vs. Metódy - kedy `=` a kedy `()` 🔑
+
+**Základný rozdiel:**
+
+### 📦 VLASTNOSTI (properties) - používame `=`
+Vlastnosť = hodnota, ktorú môžeš **čítať** aj **meniť**. Ako premenná v objekte.
+
+```javascript
+// ČÍTANIE vlastnosti (bez =)
+const text = element.textContent; // prečíta hodnotu
+const hodnota = input.value;
+
+// NASTAVENIE vlastnosti (s =)
+element.textContent = "Nový text"; // nastaví hodnotu
+input.value = "Ahoj";
+element.className = "active";
+element.id = "mojId";
+checkbox.checked = true;
+```
+
+### 🔨 METÓDY (methods) - používame `()`
+Metóda = funkcia, ktorá **niečo vykoná**. Ako príkaz.
+
+```javascript
+// VYKONANIE metódy - vždy s ()
+element.appendChild(dieťa);        // pridaj element
+element.remove();                  // zmaž sa
+element.addEventListener('click', fn); // počúvaj na kliknutie
+document.createElement('div');     // vytvor element
+element.classList.add('active');   // pridaj class
+element.classList.toggle('active'); // prepni class
+```
+
+### 💡 Ako to rozpoznať?
+
+| Ak chceš... | Použiješ... | Príklad |
+|-------------|-------------|---------|
+| **Prečítať hodnotu** | Vlastnosť (bez `=`) | `const text = input.value;` |
+| **Nastaviť hodnotu** | Vlastnosť (s `=`) | `input.value = "text";` |
+| **Vykonať akciu** | Metódu (s `()`) | `element.remove();` |
+| **Pridať/odobrať niečo** | Metódu (s `()`) | `list.appendChild(item);` |
+
+### ⚠️ Časté chyby:
+
+```javascript
+// ❌ CHYBA - zabudnuté zátvorky pri metóde
+element.remove;  // nedeje sa nič! (len odkáže na funkciu)
+
+// ✅ SPRÁVNE
+element.remove(); // vykoná sa zmazanie
+
+// ❌ CHYBA - zátvorky pri vlastnosti
+element.textContent(); // CHYBA! textContent nie je funkcia
+
+// ✅ SPRÁVNE
+element.textContent = "text"; // nastavenie
+const text = element.textContent; // čítanie
+```
+
+**Pravidlo:** Ak to **robí akciu** (pridaj, zmaž, počúvaj) → **metóda** `()`. Ak to **je hodnota** (text, farba, ID) → **vlastnosť** `=`.
+
+---
+
+## 10. Časté chyby a riešenia ⚠️
 
 ### ❌ Chyba 1: Element neexistuje (null)
 
@@ -879,7 +942,7 @@ taskList.appendChild(newLi); // Teraz sa zobrazí
 
 ---
 
-## 10. Komplexný príklad: Todo aplikácia 📝
+## 11. Komplexný príklad: Todo aplikácia 📝
 
 **HTML:**
 ```html
@@ -955,7 +1018,7 @@ addButton.addEventListener('click', () => {
 
 ---
 
-## 11. Zhrnutie - Cheatsheet 📋
+## 12. Zhrnutie - Cheatsheet 📋
 
 ### Výber elementov:
 ```javascript
@@ -1002,7 +1065,7 @@ element.addEventListener('click', () => {
 
 ---
 
-## 12. Ďalšie zdroje 🔗
+## 13. Ďalšie zdroje 🔗
 
 - [MDN: DOM Manipulation](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Manipulating_documents)
 - [JavaScript.info: Document](https://javascript.info/document)
