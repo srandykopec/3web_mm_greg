@@ -410,9 +410,9 @@ console.log(newLi); // <li></li> (prázdny element)
 ```javascript
 // Vytvorenie inputu typu checkbox
 const newInput = document.createElement('input');
-newInput.type = 'checkbox'; // nastavenie typu
-newInput.id = 'mojCheckbox';
-newInput.className = 'task-checkbox'; // nastavenie class
+newInput.type = 'checkbox'; // nastavenie typu elementu
+newInput.id = 'mojCheckbox';  // nastavenie id elementu
+newInput.className = 'task-checkbox'; // nastavenie class elementu
 
 // Vytvorenie tlačidla s textom
 const newButton = document.createElement('button');
@@ -423,15 +423,6 @@ newButton.className = 'delete-button';
 const newSpan = document.createElement('span');
 newSpan.textContent = 'Moja nová úloha';
 newSpan.className = 'task-text';
-```
-
-**📌 Príklad z našej Todo aplikácie:**
-```javascript
-let newLi = document.createElement('li');
-newLi.textContent = taskText; // nastavenie textu
-
-let newInput = document.createElement('input');
-newInput.type = 'checkbox'; // ← nastavenie typu inputu
 ```
 
 ---
@@ -454,7 +445,7 @@ newInput.type = 'checkbox'; // ← nastavenie typu inputu
 
 ### 4.1 `.appendChild()` - pridanie na koniec
 
-Pridá element ako **posledné dieťa** do rodiča.
+Pridá element ako **posledný potomok** do rodiča.
 
 ```html
 <ul id="taskList">
@@ -467,11 +458,11 @@ Pridá element ako **posledné dieťa** do rodiča.
 const taskList = document.getElementById('taskList');
 
 // Vytvorenie novej <li>
-const newLi = document.createElement('li');
-newLi.textContent = 'Nová úloha 3';
+const newLi = document.createElement('li'); //vytvorí nový element <li> ale ešte nie je pridaný do stránky:  <li></li>
+newLi.textContent = 'Nová úloha 3';  //naplní nový element:  <li>Nová úloha 3</li>  ale stále nie je zobrazený na stránke
 
 // Pridanie do zoznamu
-taskList.appendChild(newLi);
+taskList.appendChild(newLi); //až teraz sa pridá do zoznamu ako posledný prvok zoznamu
 ```
 
 **Výsledok:**
