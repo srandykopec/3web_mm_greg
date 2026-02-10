@@ -455,11 +455,11 @@ Pridá element ako **posledný potomok** do rodiča.
 ```
 
 ```javascript
-const taskList = document.getElementById('taskList');
+const taskList = document.getElementById('taskList');  //vyberieme zoznam kam chceme pridať <li>
 
 // Vytvorenie novej <li>
 const newLi = document.createElement('li'); //vytvorí nový element <li> ale ešte nie je pridaný do stránky:  <li></li>
-newLi.textContent = 'Nová úloha 3';  //naplní nový element:  <li>Nová úloha 3</li>  ale stále nie je zobrazený na stránke
+newLi.textContent = 'Nová úloha 3';  //naplní nový element:  <li>Nová úloha 3</li>  (ale stále nie je zobrazený na stránke)
 
 // Pridanie do zoznamu
 taskList.appendChild(newLi); //až teraz sa pridá do zoznamu ako posledný prvok zoznamu
@@ -488,38 +488,39 @@ taskList.appendChild(newLi); //až teraz sa pridá do zoznamu ako posledný prvo
   <button class="delete-button">Zmazať</button>
 </li>
 ```
+Pozri kód 05_aplikacia_pripomienky
 
 ```javascript
 // 1. Vytvorenie hlavného <li> elementu
-const newLi = document.createElement('li');
-newLi.className = 'task-item';
+const newLi = document.createElement('li'); // Vytvoríme prázdny <li> element v pamäti
+newLi.className = 'task-item'; // Nastavíme mu CSS class "task-item"
 
 // 2. Vytvorenie checkboxu
-const newInput = document.createElement('input');
-newInput.type = 'checkbox';
-newInput.className = 'task-checkbox';
+const newInput = document.createElement('input'); // Vytvoríme prázdny <input> element
+newInput.type = 'checkbox'; // Zmeníme typ inputu na checkbox
+newInput.className = 'task-checkbox'; // Nastavíme mu CSS class "task-checkbox"
 
 // 3. Vytvorenie span s textom úlohy
-const newSpan = document.createElement('span');
-newSpan.textContent = taskText; // text z inputu
-newSpan.className = 'task-text';
+const newSpan = document.createElement('span'); // Vytvoríme prázdny <span> element
+newSpan.textContent = taskText; // Nastavíme text, ktorý užívateľ napísal do inputu
+newSpan.className = 'task-text'; // Nastavíme mu CSS class "task-text"
 
 // 4. Vytvorenie tlačidla na zmazanie
-const newButton = document.createElement('button');
-newButton.textContent = 'Zmazať';
-newButton.className = 'delete-button';
+const newButton = document.createElement('button'); // Vytvoríme prázdny <button> element
+newButton.textContent = 'Zmazať'; // Nastavíme text, ktorý sa zobrazí na tlačidle
+newButton.className = 'delete-button'; // Nastavíme mu CSS class "delete-button"
 
 // 5. Vloženie všetkých častí do <li>
-newLi.appendChild(newInput);  // pridanie checkboxu
-newLi.appendChild(newSpan);   // pridanie textu
-newLi.appendChild(newButton); // pridanie tlačidla
+newLi.appendChild(newInput);  // Vložíme checkbox do <li> ako prvé dieťa
+newLi.appendChild(newSpan);   // Vložíme span s textom za checkbox
+newLi.appendChild(newButton); // Vložíme tlačidlo na koniec <li>
 
 // 6. Pridanie celej úlohy do zoznamu
-const taskList = document.getElementById('taskList');
-taskList.appendChild(newLi);
+const taskList = document.getElementById('taskList'); // Vyberieme <ul> element zo stránky
+taskList.appendChild(newLi); // Pridáme hotovú <li> do zoznamu (teraz sa zobrazí na stránke)
 ```
 
-**Výsledok:** Nová úloha sa objaví v zozname! 🎉
+**Výsledok:** Nová úloha sa objaví v zozname! Pozri kód todo apky. 🎉
 
 ---
 
@@ -554,22 +555,9 @@ newButton.addEventListener('click', () => {
 
 ---
 
-### 5.2 `.removeChild()` - odstránenie dieťaťa
+## 5. Zmena štýlov (CSS) 🎨
 
-Starší (ale stále používaný) spôsob.
-
-```javascript
-const taskList = document.getElementById('taskList');
-const prvaUloha = taskList.children[0];
-
-taskList.removeChild(prvaUloha); // odstráni prvú úlohu
-```
-
----
-
-## 6. Zmena štýlov (CSS) 🎨
-
-### 6.1 `.style` - priame nastavenie CSS vlastností
+### 5.1 `.style` - priame nastavenie CSS vlastností
 
 ```javascript
 const box = document.getElementById('box');
@@ -599,7 +587,7 @@ function zmenaNaZelenu(){
 
 ---
 
-### 6.2 `.classList` - práca s class (ODPORÚČANÉ) ✅
+### 5.2 `.classList` - práca s class (ODPORÚČANÉ) ✅
 
 Namiesto priameho nastavovania štýlov je lepšie používať **CSS triedy**.
 
@@ -646,9 +634,9 @@ checkbox.addEventListener('change', () => {
 
 ---
 
-## 7. Event Listeners - reagovanie na akcie 🖱️
+## 6. Event Listeners - reagovanie na akcie 🖱️
 
-### 7.1 `.addEventListener()` - základné použitie
+### 6.1 `.addEventListener()` - základné použitie
 
 ```javascript
 const button = document.getElementById('addButton');
@@ -665,7 +653,7 @@ element.addEventListener('typUdalosti', funkcia);
 
 ---
 
-### 7.2 Najpoužívanejšie eventy
+### 6.2 Najpoužívanejšie eventy
 
 | Event | Kedy sa spustí |
 |-------|----------------|
@@ -680,7 +668,7 @@ element.addEventListener('typUdalosti', funkcia);
 
 ---
 
-### 7.3 Praktické príklady z cvičení
+### 6.3 Praktické príklady z cvičení
 
 **📌 Príklad 1: Pridanie úlohy po kliknutí na tlačidlo**
 ```javascript
