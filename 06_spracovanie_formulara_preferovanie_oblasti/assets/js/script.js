@@ -15,11 +15,12 @@ function handleSubmit(event){
 
   const vsetkyCheckboxy = document.querySelectorAll('input[type="checkbox"]');
 
-  const poleCheckboxov = Array.from(vsetkyCheckboxy); //prevod nodelisu na pole (aby sme ho mohli filrovať)
+  const poleCheckboxov = Array.from(vsetkyCheckboxy); //prevod nodelisu (získali sme ho querySelectorAll) na pole (aby sme ho mohli filrovať)
 
   const zaskrtnute = poleCheckboxov.filter(checkbox => checkbox.checked) //vytiahn s poľa checkboxov iba tie, ktoré sú zaškrnuté 
 
-  console.log(zaskrtnute);
+    const vybraneTexy = zaskrtnute.map(checkbox => checkbox.value);
+    console.log('Vybrané témy:', vybraneTexy);
 };
 
 
