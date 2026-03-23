@@ -322,32 +322,12 @@ form.addEventListener('submit', function(event) {
 
 ```javascript
 function validujEmail(email) {
-    // Základná kontrola - musí obsahovať @
-    if (!email.includes('@')) {
+    // Základná kontrola - musí obsahovať @ a bodku
+    if (!email.includes('@') || !email.includes('.')) {
         return false;
     }
     
-    // Pokročilejšia kontrola (regex)
-    // ČO JE REGEX?
-    // Regex (regulárny výraz) = vzor/šablóna pre kontrolu textu
-    // Je to ako "recept" na to, ako má text vyzerať
-    
-    // Tento regex kontroluje:
-    // ^[^\s@]+ = začiatok, nie medzera, nie @, aspoň 1 znak
-    // @ = musí byť zavináč
-    // [^\s@]+ = nie medzera, nie @, aspoň 1 znak
-    // \. = musí byť bodka
-    // [^\s@]+$ = nie medzera, nie @, aspoň 1 znak, koniec
-    
-    // Príklady:
-    // ✅ "jan@email.sk" - správne
-    // ✅ "test123@gmail.com" - správne  
-    // ❌ "jan@email" - chýba bodka
-    // ❌ "janemail.sk" - chýba @
-    // ❌ "jan @email.sk" - medzera
-    
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email); // .test() vráti true/false
+    return true;
 }
 
 // Použitie:
@@ -359,11 +339,7 @@ if (validujEmail(email)) {
 }
 ```
 
-**Pre začiatočníkov:**  
-Regex môže vyzerať zložito, no zatiaľ stačí vedieť:
-- Regex je **vzor na kontrolu textu**
-- `.test(text)` vráti `true` ak text zodpovedá vzoru
-- Pre email stačí základná kontrola: `email.includes('@') && email.includes('.')`
+**Poznámka:** Pre pokročilejšiu kontrolu emailu sa používajú **regulárne výrazy (regex)**, ktoré dokážu overiť presný formát emailovej adresy.
 
 ---
 
@@ -391,54 +367,6 @@ form.addEventListener('submit', function(event) {
     
     console.log('Formulár je OK');
 });
-```
-
----
-
-## 🎨 Moderný prístup - funkcia na zobrazenie správ
-
-```javascript
-function zobrazSpravu(text, typ) {
-    const spravaElement = document.getElementById('sprava');
-    
-    // Vymaž staré správy
-    spravaElement.innerHTML = '';
-    
-    // Vytvor novú správu
-    const p = document.createElement('p');
-    p.textContent = text;
-    
-    // Pridaj správnu triedu (error alebo success)
-    spravaElement.className = 'sprava ' + typ;
-    
-    // Pridaj do stránky
-    spravaElement.appendChild(p);
-}
-
-// Použitie:
-zobrazSpravu('❌ Vyber aspoň 3 oblasti!', 'error');
-zobrazSpravu('✅ Formulár bol úspešne odoslaný!', 'success');
-```
-
-**CSS:**
-```css
-.sprava {
-    padding: 15px;
-    margin: 20px 0;
-    border-radius: 5px;
-}
-
-.sprava.error {
-    background-color: #ffebee;
-    color: #c62828;
-    border-left: 4px solid #c62828;
-}
-
-.sprava.success {
-    background-color: #e8f5e9;
-    color: #2e7d32;
-    border-left: 4px solid #2e7d32;
-}
 ```
 
 ---
@@ -487,7 +415,13 @@ form.addEventListener('submit', function(event) {
     }
     
     // ✅ VŠETKO OK
+    // Teraz potrebujeme z checkboxov vytiahnut len hodnoty (texty)
+    // checkboxy = [<input>, <input>, <input>] - NodeList elementov
+    // Array.from(checkboxy) = prevod NodeList na klasické pole
+    // .map(cb => cb.value) = z každého checkboxu vyber hodnotu
+    // Výsledok: oblasti = ["Video", "Web", "Fotografia"] - pole textov
     const oblasti = Array.from(checkboxy).map(cb => cb.value);
+    
     zobrazSpravu(
         `✅ Ďakujeme ${meno}! Tvoje oblasti: ${oblasti.join(', ')}`,
         'success'
