@@ -188,6 +188,9 @@ form.addEventListener('submit', function(event) {
     const email = document.getElementById('email').value;
     
     // Kontrola prázdneho mena
+    // .trim() - odstráni medzery na začiatku a na konci textu
+    // Napr: "  Ján  " sa zmení na "Ján"
+    // Prečo? Používateľ môže omylom dať medzeru pred menom
     if (meno.trim() === '') {
         alert('Meno je povinné!');
         return; // Zastav funkciu
@@ -209,41 +212,108 @@ form.addEventListener('submit', function(event) {
 
 ### 2. **Validácia s vizuálnou spätnou väzbou**
 
+**Čo to robí?**  
+Táto funkcia sa spúšťa **pri odoslaní formulára** a kontroluje, či sú údaje správne. Ak nie sú, zobrazí chybovú hlášku a označí pole červeným rámčekom. Ak sú v poriadku, označí pole zeleným rámčekom.
+
+**Prečo cez CSS triedy?**  
+V profesionálnej praxi **neupravujeme CSS priamo v JavaScripte** (napr. `style.color = 'red'`). Namiesto toho pridávame/odoberáme **CSS triedy** - je to čistejšie, prehľadnejšie a ľahšie sa to spravuje.
+
 ```javascript
+// Táto funkcia sa zavolá pri odoslaní formulára
 function validujMeno() {
     const menoInput = document.getElementById('meno');
     const meno = menoInput.value;
-    const chyba = document.getElementById('meno-chyba');
+    const chybaElement = document.getElementById('meno-chyba');
     
+    // Kontrola 1: Je pole prázdne?
     if (meno.trim() === '') {
-        chyba.textContent = '❌ Meno je povinné';
-        chyba.style.color = 'red';
-        menoInput.style.borderColor = 'red';
-        return false;
+        // Zobraz chybovú hlášku
+        chybaElement.textContent = '❌ Meno je povinné';
+        
+        // Pridaj CSS triedu pre chybu
+        menoInput.classList.add('input-error');
+        menoInput.classList.remove('input-success');
+        
+        chybaElement.classList.add('text-error');
+        chybaElement.classList.remove('text-success');
+        
+        return false; // Validácia zlyhala
     }
     
+    // Kontrola 2: Je meno príliš krátke?
     if (meno.length < 3) {
-        chyba.textContent = '❌ Meno musí mať minimálne 3 znaky';
-        chyba.style.color = 'red';
-        menoInput.style.borderColor = 'red';
+        chybaElement.textContent = '❌ Meno musí mať minimálne 3 znaky';
+        
+        menoInput.classList.add('input-error');
+        menoInput.classList.remove('input-success');
+        
+        chybaElement.classList.add('text-error');
+        chybaElement.classList.remove('text-success');
+        
         return false;
     }
     
-    // Všetko OK
-    chyba.textContent = '✅ V poriadku';
-    chyba.style.color = 'green';
-    menoInput.style.borderColor = 'green';
-    return true;
+    // ✅ Všetko je OK!
+    chybaElement.textContent = '✅ V poriadku';
+    
+    menoInput.classList.add('input-success');
+    menoInput.classList.remove('input-error');
+    
+    chybaElement.classList.add('text-success');
+    chybaElement.classList.remove('text-error');
+    
+    return true; // Validácia prešla
 }
 
-// Validuj pri zadávaní
-document.getElementById('meno').addEventListener('input', validujMeno);
+// Zavolaj validáciu pri odoslaní formulára
+const form = document.getElementById('formular');
+form.addEventListener('submit', function(event) {
+    event.preventDefault();
+    
+    // Validuj meno
+    if (!validujMeno()) {
+        return; // Ak validácia zlyhala, zastav odoslanie
+    }
+    
+    // Tu pokračuj s odoslaním formulára...
+    console.log('Formulár je v poriadku!');
+});
 ```
 
 **HTML:**
 ```html
-<input type="text" id="meno">
-<span id="meno-chyba"></span>
+<form id="formular">
+    <input type="text" id="meno" placeholder="Tvoje meno">
+    <span id="meno-chyba"></span>
+    <button type="submit">Odoslať</button>
+</form>
+```
+
+**CSS:**
+```css
+/* Červený rámček pri chybe */
+.input-error {
+    border: 2px solid #e74c3c;
+    background-color: #ffebee;
+}
+
+/* Zelený rámček keď je OK */
+.input-success {
+    border: 2px solid #27ae60;
+    background-color: #e8f5e9;
+}
+
+/* Červený text pri chybe */
+.text-error {
+    color: #e74c3c;
+    font-weight: bold;
+}
+
+/* Zelený text keď je OK */
+.text-success {
+    color: #27ae60;
+    font-weight: bold;
+}
 ```
 
 ---
@@ -252,14 +322,32 @@ document.getElementById('meno').addEventListener('input', validujMeno);
 
 ```javascript
 function validujEmail(email) {
-    // Základná kontrola
+    // Základná kontrola - musí obsahovať @
     if (!email.includes('@')) {
         return false;
     }
     
     // Pokročilejšia kontrola (regex)
+    // ČO JE REGEX?
+    // Regex (regulárny výraz) = vzor/šablóna pre kontrolu textu
+    // Je to ako "recept" na to, ako má text vyzerať
+    
+    // Tento regex kontroluje:
+    // ^[^\s@]+ = začiatok, nie medzera, nie @, aspoň 1 znak
+    // @ = musí byť zavináč
+    // [^\s@]+ = nie medzera, nie @, aspoň 1 znak
+    // \. = musí byť bodka
+    // [^\s@]+$ = nie medzera, nie @, aspoň 1 znak, koniec
+    
+    // Príklady:
+    // ✅ "jan@email.sk" - správne
+    // ✅ "test123@gmail.com" - správne  
+    // ❌ "jan@email" - chýba bodka
+    // ❌ "janemail.sk" - chýba @
+    // ❌ "jan @email.sk" - medzera
+    
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
+    return emailRegex.test(email); // .test() vráti true/false
 }
 
 // Použitie:
@@ -270,6 +358,12 @@ if (validujEmail(email)) {
     console.log('Email nie je správny');
 }
 ```
+
+**Pre začiatočníkov:**  
+Regex môže vyzerať zložito, no zatiaľ stačí vedieť:
+- Regex je **vzor na kontrolu textu**
+- `.test(text)` vráti `true` ak text zodpovedá vzoru
+- Pre email stačí základná kontrola: `email.includes('@') && email.includes('.')`
 
 ---
 
@@ -414,58 +508,7 @@ function zobrazSpravu(text, typ) {
 
 ---
 
-## 🔥 Moderné knihovne na validáciu
 
-V reálnych projektoch sa často používajú **hotové knihovne**:
-
-### 1. **Yup** (populárne pre React)
-```javascript
-import * as yup from 'yup';
-
-const schema = yup.object().shape({
-    meno: yup.string().min(3).required('Meno je povinné'),
-    email: yup.string().email('Neplatný email').required(),
-    vek: yup.number().min(18).max(120)
-});
-
-// Validácia
-schema.validate({ meno: 'Ján', email: 'jan@email.sk', vek: 20 })
-    .then(valid => console.log('OK'))
-    .catch(err => console.log(err.message));
-```
-
-### 2. **Joi** (populárne pre Node.js/Backend)
-```javascript
-const Joi = require('joi');
-
-const schema = Joi.object({
-    meno: Joi.string().min(3).required(),
-    email: Joi.string().email().required(),
-    vek: Joi.number().integer().min(18).max(120)
-});
-```
-
-### 3. **React Hook Form** (pre React formuláre)
-```javascript
-import { useForm } from 'react-hook-form';
-
-function Formular() {
-    const { register, handleSubmit, errors } = useForm();
-    
-    const onSubmit = (data) => {
-        console.log(data);
-    };
-    
-    return (
-        <form onSubmit={handleSubmit(onSubmit)}>
-            <input {...register("meno", { required: true, minLength: 3 })} />
-            {errors.meno && <span>Meno je povinné</span>}
-        </form>
-    );
-}
-```
-
----
 
 ## ✅ Best Practices (osvedčené postupy)
 
@@ -579,26 +622,6 @@ function validujHeslo(heslo) {
 
 **Zlaté pravidlo:** 
 > **NIKDY neveruj len klientskej validácii. Vždy validuj aj na serveri!**
-
----
-
-## 💡 Pre vašu hodinu - čo učiť
-
-### **Začiatočníci:**
-1. HTML5 atribúty (`required`, `type="email"`, `min`, `max`)
-2. Základná JS validácia (`if (hodnota === '')`)
-3. `alert()` pre chybové správy
-
-### **Pokročilí:**
-1. Vlastná funkcia na zobrazenie správ
-2. Real-time validácia (počas písania)
-3. Vizuálne označenie chýb (červený border)
-4. Validácia checkboxov (min. počet)
-
-### **Profesionálna úroveň:**
-1. Regex validácia
-2. Asynchrónna validácia (kontrola na serveri)
-3. Použitie validačných knižníc
 
 ---
 
