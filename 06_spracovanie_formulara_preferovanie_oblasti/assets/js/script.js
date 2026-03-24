@@ -13,6 +13,11 @@ function handleSubmit(event){
   const emailInput = document.getElementById('email');
   const email = emailInput.value;
 
+
+  if (!validujEmail(email)){
+    return;
+  }
+
   const vsetkyCheckboxy = document.querySelectorAll('input[type="checkbox"]');
 
   const poleCheckboxov = Array.from(vsetkyCheckboxy); //prevod nodelisu (získali sme ho querySelectorAll) na pole (aby sme ho mohli filrovať)
@@ -21,7 +26,10 @@ function handleSubmit(event){
 
   const zaskrtnute = poleCheckboxov.filter(checkbox => checkbox.checked) //vytiahn s poľa checkboxov iba tie, ktoré sú zaškrnuté 
 
-  // console.log("zaskrtnute: " + zaskrtnute)
+  if (!validujPocetOblasti(zaskrtnute)){
+    return;
+  };
+  
 
 
   const vybraneTexy = zaskrtnute.map(checkbox => checkbox.value);
@@ -52,5 +60,23 @@ function handleSubmit(event){
 
   zobrazSpravu(`Ďakujem ${meno}, tu sú tvoje preferované oblasti: ${temyText}`);
 
+  
+  function validujPocetOblasti(zaskrtnute) {
+    if (zaskrtnute.length < 3){
+      console.log('Musíš vybrať aspoň 3 oblasti');
+      alert('Musíš vybrať aspoň 3 oblasti');
+      return false;
+    }
+    return true;
+  }
 
-  };
+  funcion validujEmail(email){
+    if (email.includes('@')) || (email.includes('.')){
+      alert('Email musí obsahovať @ a bodku.');
+      return false;
+    }
+    return true;
+  }
+
+};
+
