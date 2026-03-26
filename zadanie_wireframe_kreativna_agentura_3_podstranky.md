@@ -119,7 +119,7 @@ Vytvorte **Fiktívnu agentúru** (vymyslíte si názov, logo, služby)
 - Krátky popis (1-2 vety): Napríklad *"Pozrite si výber našich najlepších prác"*
 
 #### **Grid projektov**
-- **Minimálne 6 projektov** 
+- **Minimálne 6 projektov.** 
 - Rozloženie: 3 projekty na riadok (desktop), 1 projekt na riadok (mobil)
 
 **Každý projekt musí obsahovať:**
