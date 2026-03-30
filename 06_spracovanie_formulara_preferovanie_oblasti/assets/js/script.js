@@ -71,7 +71,7 @@ function handleSubmit(event){
   }
 
   function validujEmail(email){
-    if (email.includes('@')) || (email.includes('.')){
+    if (email.includes('@') || email.includes('.')){
       alert('Email musí obsahovať @ a bodku.');
       return false;
     }
