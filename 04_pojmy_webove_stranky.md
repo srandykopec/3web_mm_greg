@@ -302,6 +302,11 @@ mojportfolio/
 
 ## 🔄 Systémy na správu verzií – Git a GitHub
 
+### Čo je systém na správu verzií (VCS)?
+**Systém na správu verzií** (Version Control System, VCS) je softvérový nástroj, ktorý systematicky zaznamenáva zmeny v súboroch a umožňuje sledovanie evolúcie projektu v čase. VCS slúži na evidenciu **kto, kedy a prečo** vykonal konkrétne úpravy v kóde.
+
+
+
 ### Čo je Git?
 **Git** je systém na správu verzií, ktorý zaznamenáva históriu zmien v kóde. Funguje ako "cestovanie v čase" – môžeš sa vrátiť k staršej verzii projektu, vidieť kto čo zmenil a bezpečne spolupracovať s inými.
 
