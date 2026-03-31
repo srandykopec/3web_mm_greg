@@ -1,0 +1,144 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: linear-gradient(135deg, #f5f0e8 0%, #ede6db 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.container {
+    background: #fdfcfa;
+    border-radius: 12px;
+    padding: 48px;
+    max-width: 520px;
+    width: 100%;
+    box-shadow: 0 20px 60px rgba(109, 88, 67, 0.15), 0 0 0 1px rgba(212, 196, 176, 0.3);
+    border: 1px solid #e8dfd2;
+}
+
+h1 {
+    color: #3d2f20;
+    font-size: 24px;
+    margin-bottom: 32px;
+    text-align: center;
+    font-weight: 600;
+}
+
+.form-group {
+    margin-bottom: 24px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: #6d5843;
+    font-weight: 500;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+input[type="number"] {
+    width: 100%;
+    padding: 14px 16px;
+    background: #ffffff;
+    border: 2px solid #e8dfd2;
+    border-radius: 6px;
+    color: #3d2f20;
+    font-size: 15px;
+    font-family: inherit;
+    transition: all 0.2s ease;
+    outline: none;
+}
+
+input[type="number"]:focus {
+    border-color: #8b7355;
+    box-shadow: 0 0 0 3px rgba(139, 115, 85, 0.15);
+    background: #fffefb;
+}
+
+input[type="number"]:hover {
+    border-color: #c9b89a;
+    background: #fffefb;
+}
+
+input[type="number"]::placeholder {
+    color: #a89680;
+}
+
+.btn-submit {
+    width: 100%;8b7355 0%, #6d5843 100%);
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 8px;
+    box-shadow: 0 4px 12px rgba(109, 88, 67, 0.3);
+}
+
+.btn-submit:hover {
+    background: linear-gradient(135deg, #9d8264 0%, #7e6552 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(109, 88, 67, 0.4);
+}
+
+.btn-submit:active {
+    background: linear-gradient(135deg, #6d5843 0%, #5a4735 100%);
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(109, 88, 678eef 0%, #2a7edf 100%);
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(74, 158, 255, 0.3);
+}
+
+.sprava {
+    margin-top: 24px;
+    padding: 16px 20px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 500;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.sprava.success {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    border: 1px solid #a5d6a7;
+    box-shadow: 0 4px 12px rgba(46, 125, 50, 0.1);
+}
+
+.sprava.error {
+    background-color: #ffebee;
+    color: #c62828;
+    border: 1px solid #ef9a9a;
+    box-shadow: 0 4px 12px rgba(198, 40, 40, 0.1);
+}
+
+.sprava.hidden {
+    display: none;
+}

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Newsletter - Prihlásenie</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Výpočet čísel</h1>
+        <form id="priklady">
+            <!-- Číslo A -->
+            <div class="form-group">
+                <label for="cislo_a">Prvé číslo</label>
+                <input type="number" id="cislo_a" placeholder="Zadajte prvé číslo" required>
+            </div>
+            <!-- Číslo B -->
+            <div class="form-group">
+                <label for="cislo_b">Druhé číslo</label>
+                <input type="number" id="cislo_b" placeholder="Zadajte druhé číslo" required>
+            </div>
+            <!-- Číslo C -->
+            <div class="form-group">
+                <label for="cislo_c">Tretie číslo</label>
+                <input type="number" id="cislo_c" placeholder="Zadajte tretie číslo" required>
+            </div>
+
+          
+            <button type="submit" class="btn-submit">Odoslať</button>
+        </form>
+
+        <!-- Miesto pre výsledok/error -->
+        <div id="sprava" class="sprava hidden"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
