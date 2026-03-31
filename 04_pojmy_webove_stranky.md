@@ -302,8 +302,13 @@ mojportfolio/
 
 ## 🔄 Systémy na správu verzií – Git a GitHub
 
+### Čo je systém na správu verzií (VCS)?
+**Systém na správu verzií** (Version Control System, VCS) je softvérový nástroj, ktorý systematicky zaznamenáva zmeny v súboroch a umožňuje sledovanie evolúcie projektu v čase. VCS slúži na evidenciu **kto, kedy a prečo** vykonal konkrétne úpravy v kóde.
+
+
+
 ### Čo je Git?
-**Git** je systém, ktorý zaznamenáva históriu zmien v kóde. Funguje ako "cestovanie v čase" – môžeš sa vrátiť k staršej verzii projektu, vidieť kto čo zmenil a bezpečne spolupracovať s inými.
+**Git** je systém na správu verzií, ktorý zaznamenáva históriu zmien v kóde. Funguje ako "cestovanie v čase" – môžeš sa vrátiť k staršej verzii projektu, vidieť kto čo zmenil a bezpečne spolupracovať s inými.
 
 ### Na čo to slúži?
 - ✅ **Záloha** – nikdy nestratíš kód, všetko je v histórii
@@ -311,10 +316,99 @@ mojportfolio/
 - ✅ **Experimentovanie** – môžeš skúšať zmeny bez rizika pokazenia fungujúceho kódu
 - ✅ **História** – vieš, kto a kedy urobil zmenu
 
+### Čo je GitHub?
+**GitHub** je webová platforma (služba na internete), ktorá poskytuje priestor na ukladanie a správu Git repozitárov v cloude. Je to zároveň sociálna sieť pre programátorov.
+
 ### Základné pojmy
 - **Repository (repozitár)** – priečinok s projektom a celou jeho históriou
 - **Commit** – "snímka" projektu v danom čase so správou o zmene
-- **GitHub/GitLab** – cloudový priestor pre zálohu a spoluprácu + **GitHub Pages** (bezplatný hosting)
+- **Branch (vetva)** – oddelená línia vývoja projektu (napr. testovanie novej funkcie)
+
+
+
+### Rozdiel medzi Git a GitHub
+
+| **Git** | **GitHub** |
+|---------|------------|
+| ✅ Nástroj (program) na správu verzií | ✅ Webová platforma (služba) |
+| ✅ Beží lokálne na tvojom počítači | ✅ Beží na internete (cloud) |
+| ✅ Funguje aj bez internetu | ✅ Potrebuje internet |
+| ✅ Zadarmo a open-source | ✅ Zadarmo pre verejné projekty, platené pre súkromné |
+| ✅ Spravuje históriu zmien | ✅ Ukladá repozitáre online + spolupráca |
+
+### 💡 Ako Git a GitHub spolupracujú?
+
+**Lokálne (na tvojom počítači) – Git:**
+1. Vytvoríš projekt a inicializuješ Git
+2. Robíš zmeny v kóde
+3. Ukladáš "snímky" (commits) s popisom zmeny
+4. Celá história je uložená lokálne
+
+**Online (na internete) – GitHub:**
+1. Vytvoríš repozitár na GitHub-e
+2. **Napojíš** (push) svoj lokálny Git repozitár na GitHub
+3. Zmeny sa synchronizujú medzi tvojim počítačom a GitHub-om
+4. Ostatní môžu stiahnuť (pull) tvoj kód a spolupracovať
+
+### 🔄 Proces práce s Git a GitHub – základné príkazy
+
+Keď pracuješ na projekte, opakuješ tento cyklus:
+
+#### 1️⃣ **COMMIT** – Uloženie zmien lokálne (na tvojom počítači)
+- Vytvoríš "snímku" aktuálneho stavu projektu
+- Zmeny sú uložené **iba na tvojom počítači**
+- GitHub o tom ešte nevie
+
+#### 2️⃣ **PUSH** – Odoslanie zmien na GitHub (do cloudu)
+
+- Tvoje lokálne commity sa **odošlú na GitHub**
+- Teraz je záloha v cloude
+- Ostatní (alebo ty na inom zariadení) môžu vidieť nové zmeny
+
+#### 3️⃣ **FETCH** – Stiahnutie informácií o zmenách (bez zlúčenia)
+
+- Skontroluje, či sú na GitHub-e **nové zmeny**
+- Stiahne informácie, ale **nepridá ich do tvojho kódu**
+- Používa sa na zistenie, čo je nové
+
+#### 4️⃣ **PULL** – Stiahnutie a zlúčenie zmien z GitHub-u
+
+- Stiahne nové zmeny z GitHub-u a **automaticky ich zlúči** s tvojim kódom
+- Používaj vždy, keď chceš **aktualizovať svoj kód** z GitHub-u
+- `pull = fetch + merge` (stiahnutie + zlúčenie)
+
+---
+
+### ⚠️ Dôležité pravidlá
+
+1. **Vždy rob PULL pred začatím práce**
+   - Aby si mal najnovšiu verziu kódu
+   - Predídeš konfliktom
+
+2. **Vždy rob COMMIT a PUSH po skončení práce**
+   - Aby bola záloha na GitHub-e
+   - Aby si mal prístup na inom zariadení
+
+3. **Píš zrozumiteľné commit správy**
+   - ❌ "update" alebo "fix"
+   - ✅ "Pridaný kontaktný formulár" alebo "Opravená chyba v navigácii"
+
+### 💡 Zhrnutie príkazov
+
+| Príkaz | Čo robí | Kedy použiť |
+|--------|---------|-------------|
+| `git add .` | Pridá všetky zmenené súbory na commit | Po úpravách kódu |
+| `git commit -m "správa"` | Uloží zmeny lokálne so správou | Po dokončení funkcie/úpravy |
+| `git push` | Odošle lokálne commity na GitHub | Po commite, aby bola záloha |
+| `git pull` | Stiahne a zlúči zmeny z GitHub-u | Pred začatím práce na inom PC |
+| `git fetch` | Stiahne info o zmenách bez zlúčenia | Keď chceš len skontrolovať |
+
+### Výhody použitia GitHub s Git-om
+- ✅ **Záloha v cloude** – ak sa pokazí počítač, kód je v bezpečí
+- ✅ **Spolupráca** – viacero ľudí pracuje na jednom projekte
+- ✅ **Portfólio** – ukazuje tvoje projekty potenciálnym zamestnávateľom
+- ✅ **Open-source** – zdieľaš projekty s celým svetom
+- ✅ **GitHub Pages** – bezplatný hosting pre statické webové stránky
 
 ```
 
