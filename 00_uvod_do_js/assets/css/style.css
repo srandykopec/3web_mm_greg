@@ -19,7 +19,7 @@ button {
 }
 
 /* Alternatívne pozadie stránky prepínané triedou na <body> */
-.alt-bg {
+.alternativne-pozadie {
 	background: #1e293b; /* tmavé pozadie */
 	color: #ffffff;      /* svetlý text pre kontrast */
 }
