@@ -14,8 +14,8 @@ if (btn && text){
     btn.addEventListener("click",() => {
         // Zmení textový obsah elementu text na nový text
         text.textContent = "Nový obsah, koý som zmenil cez JavaScript!";
-        // Prepína triedu alt-bg na elemente body, čo môže meniť štýl pozadia
-        document.body.classList.toggle("alt-bg");
+        // Prepína triedu alternativne-pozadie na elemente body, čo môže meniť štýl pozadia
+        document.body.classList.toggle("alternativne-pozadie");
     });
 }
 
